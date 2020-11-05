@@ -1,3 +1,6 @@
+##### The solution was taken from [this comment](https://github.com/poehlerj/no-title-bar/issues/24#issuecomment-706577915)
+
+
 # No Title Bar
 
 An extension for GNOME Shell that merges the activity bar and the title bar of maximized windows.
