@@ -3,7 +3,6 @@ const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Shell = imports.gi.Shell;
 const St = imports.gi.St;
-const Tweener = imports.ui.tweener;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
@@ -199,31 +198,11 @@ var AppMenu = class {
                 this._tooltip.opacity = 0;
                 this._tooltip.set_position(x, y);
 
-                Tweener.removeTweens(this._tooltip);
-                Tweener.addTween(this._tooltip, {
-                    opacity: 255,
-                    time: SHOW_DURATION,
-                    transition: 'easeOutQuad',
-                });
-
                 return false;
             }));
         } else if (this._tooltipDelayCallbackID > 0) {
             // If the event ran, then we hide.
             this._resetMenuCallback();
-
-            Tweener.removeTweens(this._tooltip);
-            Tweener.addTween(this._tooltip, {
-                opacity: 0,
-                time: HIDE_DURATION,
-                transition: 'easeOutQuad',
-                onComplete: Lang.bind(this, function() {
-                    if (this._tooltipIsShown) {
-                        Main.uiGroup.remove_actor(this._tooltip);
-                        this._tooltipIsShown = false;
-                    }
-                })
-            });
 
             this._tooltipDelayCallbackID = 0;
         }
